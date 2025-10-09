@@ -1,0 +1,130 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.navbar img {
+    height: 50px;
+    object-fit: contain;
+}
+
+.wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 70px);
+    margin-top: 70px;
+    z-index: 10;
+    position: relative;
+    padding: 1rem;
+    text-align: center;
+}
+
+form#loginForm {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    max-width: 350px;
+    width: 100%;
+}
+
+form#loginForm input {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+/* ===== Marquee styles (same effect as HomePage) ===== */
+.scrolling-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 2rem;
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.scrolling-track {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    width: max-content;
+    animation: scroll 28s linear infinite;
+}
+
+.scrolling-item {
+    flex: 0 0 auto;
+    height: 300px; /* fixed height like HomePage tees */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scrolling-item img {
+    height: 300px !important; /* override old 40px */
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.9);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.scrolling-item img:hover {
+    transform: translateY(-2px) scale(1.03);
+    filter: none;
+}
+
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.neon-toast {
+  background: rgba(0, 0, 0, 0.85) !important;
+  color: #b966ff !important;
+  font-weight: bold;
+  text-shadow: 0 0 5px #b966ff, 0 0 10px #b966ff, 0 0 20px #b966ff;
+  border: 2px solid #b966ff !important;
+  box-shadow: 0 0 10px #b966ff, 0 0 20px #ff00ff inset;
+  border-radius: 12px !important;
+}
+
+.neon-toast .Toastify__progress-bar {
+  background: linear-gradient(90deg, #b966ff, #ff00ff, #b966ff) !important;
+  box-shadow: 0 0 5px #b966ff, 0 0 10px #ff00ff;
+}
+
+.neon-toast.neon-error {
+  color: #ff4d4d !important;
+  border-color: #ff4d4d !important;
+  text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
+}
+
+.neon-toast.neon-warn {
+  color: #ffff66 !important;
+  border-color: #ffff66 !important;
+  text-shadow: 0 0 5px #ffff66, 0 0 10px #ffff66, 0 0 20px #ffff66;
+}
