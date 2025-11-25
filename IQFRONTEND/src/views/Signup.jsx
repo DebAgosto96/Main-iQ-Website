@@ -22,14 +22,14 @@ export default function SignUp() {
   const [progress, setProgress] = useState(0);
 
   const logos = [
-    { href: "https://www.nasa.gov", img: "/femalehoodie.png", alt: "NASA" },
-    { href: "https://www.spacex.com", img: "/sorry.png", alt: "SpaceX" },
-    { href: "https://www.astronomy.com", img: "femalehoodie.png", alt: "Astronomy" },
-    { href: "https://astroscale.com", img: "/sorry.png", alt: "Astroscale" },
-    { href: "https://www.astrobotic.com", img: "femalehoodie.png", alt: "Astrobotic" },
-    { href: "https://aas.org/news/astronomy-in-the-news", img: "/sorry.png", alt: "AAS" },
-    { href: "https://www.space.com", img: "femalehoodie.png", alt: "Space News" },
-    { href: "https://phys.org/space-news/astronomy/", img: "/sorry.png", alt: "Phys Org" },
+    { href: "https://www.tiktok.com/@iqbuvl", img: "/femalehoodie.png", alt: "hoodie" },
+    { href: "https://www.tiktok.com/@iqbuvl", img: "/sorry.png", alt: "hoodie" },
+    { href: "https://www.tiktok.com/@iqbuvl", img: "femalehoodie.png", alt: "hoodie" },
+    { href: "https://www.tiktok.com/@iqbuvl", img: "/sorry.png", alt: "hoodie" },
+    { href: "https://www.tiktok.com/@iqbuvl", img: "femalehoodie.png", alt: "hoodie" },
+    { href: "https://www.tiktok.com/@iqbuvl", img: "/sorry.png", alt: "hoodie" },
+    { href: "https://www.tiktok.com/@iqbuvl", img: "femalehoodie.png", alt: "hoodie" },
+    { href: "https://www.tiktok.com/@iqbuvl", img: "/sorry.png", alt: "hoodie" },
   ];
 
   const onChange = (e) => {

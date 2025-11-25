@@ -1,0 +1,91 @@
+.leaderboard-wrapper {
+  width: 100%;
+  padding: 6rem 2rem 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.leaderboard-card {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.leaderboard-outer-block {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.leaderboard-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+
+  background: linear-gradient(to right, #ffffff, #bc215f);
+  background-clip: text;         
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+}
+
+.leaderboard-meta {
+  text-align: center;
+  color: #ddd;
+  margin-bottom: 2.5rem;
+}
+
+/* Table rows */
+.leaderboard-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.leaderboard-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(20, 20, 20, 0.45);
+  padding: 1.2rem 1.5rem;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rank-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff5d87;
+  min-width: 40px;
+}
+
+.player-info {
+  flex-grow: 1;
+  margin-left: 1rem;
+}
+
+.player-name {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.player-service {
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.player-stats {
+  text-align: right;
+}
+
+.player-rating {
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.player-sessions {
+  color: #bbb;
+  font-size: 0.95rem;
+}

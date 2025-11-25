@@ -1,0 +1,59 @@
+.aboutPage-container {
+  padding: 4rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+}
+
+.aboutPage-section {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.aboutPage-section:hover {
+  transform: translateY(-6px) scale(1.01);
+}
+
+.aboutPage-heading {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #ffffff, #bc215f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aboutPage-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #ddd;
+}
+
+.aboutPage-gradientCard {
+  background: linear-gradient(135deg, #1e1e2f, #3a0049);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.aboutPage-highlight {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 3rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.aboutPage-subheading {
+  font-size: 2rem;
+  color: #00fff7;
+  margin-bottom: 1rem;
+}

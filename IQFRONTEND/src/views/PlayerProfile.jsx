@@ -18,7 +18,10 @@ const PlayerProfile = () => {
     const role = (localStorage.getItem("role") || "").toLowerCase();
 
     if (!token) {
-      toast.warn("Please log in first.", { className: "neon-toast neon-warn", icon: "⚠" });
+      toast.warn("Please log in first.", {
+        className: "neon-toast neon-warn",
+        icon: "⚠",
+      });
       navigate("/login");
       return;
     }
@@ -77,9 +80,15 @@ const PlayerProfile = () => {
           className="profile-img"
         />
         <h1>{player.gamerTag}</h1>
-        <p><strong>Email:</strong> {player.email}</p>
-        <p><strong>Country:</strong> {player.country}</p>
-        <p><strong>Bio:</strong> {player.bio || "No bio yet."}</p>
+        <p>
+          <strong>Email:</strong> {player.email}
+        </p>
+        <p>
+          <strong>Country:</strong> {player.country}
+        </p>
+        <p>
+          <strong>Bio:</strong> {player.bio || "No bio yet."}
+        </p>
 
         <div className="actions">
           <button>Edit Profile</button>

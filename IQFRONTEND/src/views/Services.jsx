@@ -16,7 +16,6 @@ const Services = () => {
   const handleBook = (service) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      // send them to login and remember intent
       navigate("/login", { state: { redirectTo: "/bookplayer", service } });
       return;
     }

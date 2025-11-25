@@ -1,0 +1,104 @@
+.careers-wrapper {
+  width: 100%;
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.careers-card {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.careers-outer-block {
+  padding: 3rem 2rem;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Title gradient text */
+.careers-title {
+  text-align: center;
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+
+  background: linear-gradient(to right, #ffffff, #bc215f);
+  background-clip: text;              /* Standard */
+  -webkit-background-clip: text;      /* Webkit */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.careers-meta {
+  text-align: center;
+  color: #ccc;
+  margin-bottom: 2.5rem;
+}
+
+.careers-block {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.careers-heading {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+
+  background: linear-gradient(to right, #ffffff, #bc215f);
+  background-clip: text;             
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.careers-text {
+  color: #eee;
+  margin-bottom: 0.7rem;
+  line-height: 1.6;
+}
+
+/* Apply button */
+.careers-apply-btn {
+  display: inline-block;
+  padding: 0.6rem 1.6rem;
+  margin-top: 0.5rem;
+
+  background: linear-gradient(270deg, #517edf, #b72394, #ff5d87, #517edf);
+  background-size: 300% 300%;
+  animation: applyPulse 4s ease infinite;
+
+  color: #fff;
+  font-weight: bold;
+  border-radius: 999px;
+  text-decoration: none;
+
+  box-shadow:
+    0 0 6px rgba(81,126,223,0.75),
+    0 0 12px rgba(183,35,148,0.55),
+    0 0 18px rgba(255,93,135,0.45);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.careers-apply-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 10px rgba(81,126,223,1),
+    0 0 20px rgba(183,35,148,0.8),
+    0 0 30px rgba(255,93,135,0.7);
+}
+
+@keyframes applyPulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

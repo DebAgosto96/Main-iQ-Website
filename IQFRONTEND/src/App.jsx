@@ -17,9 +17,14 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import BookPlayer from "./views/BookPlayer";
 import EditUserProfile from "./views/EditUserProfile";
 import PlayerSignup from "./views/PlayerSignUp";
-
 import ForgotPassword from "./views/ForgotPassword";
 import ResetPassword from "./views/ResetPassword";
+import AboutUs from "./views/AboutUs";
+import ContactUs from "./views/ContactUs";
+import PrivacyPolicy from "./views/PrivacyPolicy";
+import FAQ from "./views/FAQ";   
+import Leaderboard from "./views/Leaderboard";
+import Careers from "./views/Careers";
 
 const AdminOnly = ({ children }) => {
   const role = (localStorage.getItem("role") || "").toLowerCase();
@@ -29,13 +34,19 @@ const AdminOnly = ({ children }) => {
 const App = () => {
   return (
     <>
-      <VideoBG src="/HOME2.mp4" />
+      <VideoBG src="/home.mp4" />
       <Navbar />
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<Services />} />
-
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/Leaderboard" element={<Leaderboard />} />
+          <Route path="/careers" element={<Careers />} />
+          
           <Route
             path="/bookplayer"
             element={
@@ -48,12 +59,9 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/editprofile" element={<EditUserProfile />} />
-
-
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
 
-          {/* User profile */}
           <Route
             path="/profile"
             element={
@@ -68,7 +76,6 @@ const App = () => {
             element={<Navigate to="/profile" replace />}
           />
 
-          {/* Admin profile (separate page) */}
           <Route
             path="/admin/profile"
             element={

@@ -49,7 +49,6 @@ export default function EditUserProfile() {
   }, [navigate]);
 
   useEffect(() => {
-    // cleanup object URLs
     return () => {
       if (imagePreview) URL.revokeObjectURL(imagePreview);
     };
@@ -153,7 +152,7 @@ export default function EditUserProfile() {
 
   return (
     <>
-      <VideoBG src="/heavysmoke.mp4" />
+      <VideoBG src="/Desktop.mp4" />
       <div className="profile-page">
         <form className="profile-card" onSubmit={handleSubmit} noValidate>
           {/* AVATAR + EDIT BUTTON (label over hidden input) */}

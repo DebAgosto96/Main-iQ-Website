@@ -1,0 +1,127 @@
+.policy-wrapper {
+  width: 100%;
+  padding-top: 6.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.policy-card {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.policy-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(to right, #ffffff, #bc215f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.policy-meta {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: #dddddd;
+  font-size: 1rem;
+}
+
+/* BIG OUTER CARD */
+.policy-outer-block {
+  padding: 2.5rem 2rem;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+/* INNER BLOCKS */
+.policy-block {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.policy-block:last-child {
+  margin-bottom: 0;
+}
+
+.policy-heading {
+  font-size: 1.9rem;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(to right, #ffffff, #bc215f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.policy-subheading {
+  font-size: 1.3rem;
+  margin: 1rem 0 0.5rem 0;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.policy-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.9rem;
+  color: #eeeeee;
+}
+
+.policy-list {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.policy-list li {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+  color: #f5f5f5;
+}
+
+/* Contact button */
+.policy-contact-button {
+  margin-left: 0.5rem;
+  margin-right: 0.7rem;
+  display: inline-block;
+  padding: 0.6rem 1.6rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+  background: linear-gradient(270deg, #517edf, #b72394, #ff5d87, #517edf);
+  background-size: 300% 300%;
+  animation: contactNeonPulse 4s ease infinite;
+  box-shadow:
+    0 0 6px rgba(81,126,223,0.75),
+    0 0 12px rgba(183,35,148,0.55),
+    0 0 18px rgba(255,93,135,0.45);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.policy-contact-button:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes contactNeonPulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

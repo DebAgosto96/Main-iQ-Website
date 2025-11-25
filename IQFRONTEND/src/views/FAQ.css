@@ -1,0 +1,98 @@
+.faq-wrapper {
+  width: 100%;
+  padding-top: 6.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.faq-card {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.faq-outer-block {
+  padding: 3rem 2rem;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+/* Title and meta */
+
+.faq-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #ffffff, #bc215f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.faq-meta {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #dddddd;
+  font-size: 1rem;
+}
+
+/* Inner blocks */
+
+.faq-block {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Headings and text */
+
+.faq-heading {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #ffffff, #bc215f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.faq-subheading {
+  font-size: 1.3rem;
+  margin: 1rem 0 0.5rem 0;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.faq-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.9rem;
+  color: #eeeeee;
+}
+
+/* List style */
+
+.faq-list {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.faq-list li {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+  color: #f5f5f5;
+}

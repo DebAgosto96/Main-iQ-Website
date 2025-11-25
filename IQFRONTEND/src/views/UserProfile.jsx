@@ -60,15 +60,15 @@ const UserProfile = () => {
   const logos = Array.isArray(user?.socialLinks) && user.socialLinks.length
     ? user.socialLinks
     : [
-        { href: "https://instagram.com/", img: "/ig.png", alt: "Instagram" },
+        { href: "https://www.instagram.com/buvl/", img: "/ig.png", alt: "Instagram" },
         { href: "https://twitch.tv/", img: "/twitch.png", alt: "Twitch" },
-        { href: "https://youtube.com/", img: "/youtube.png", alt: "YouTube" },
-        { href: "https://tiktok.com/", img: "/tiktok.png", alt: "TikTok" },
+        { href: "https://www.youtube.com/@iQBuvl", img: "/youtube.png", alt: "YouTube" },
+        { href: "https://www.tiktok.com/@iqbuvl", img: "/tiktok.png", alt: "TikTok" },
       ];
 
   return (
     <>
-      <VideoBG src="/heavysmoke.mp4" />
+      <VideoBG src="/Desktop.mp4" />
       <div className="profile-page">
         <div className="profile-card">
           <div className="avatar-wrapper">
