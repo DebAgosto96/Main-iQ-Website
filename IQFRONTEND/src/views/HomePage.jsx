@@ -82,8 +82,8 @@ const HomePage = () => {
 
             <div className="stats">
               <div className="stat">
-                <span className="counter" data-target="80">0</span>
-                <div>Projects Delivered</div>
+                <span className="counter" data-target="200">0</span>
+                <div>Tournaments</div>
               </div>
 
               <div className="stat">
@@ -92,7 +92,7 @@ const HomePage = () => {
               </div>
 
               <div className="stat">
-                <span className="counter" data-target="8">0</span>
+                <span className="counter" data-target="30">0</span>
                 <div>Team Members</div>
               </div>
             </div>
