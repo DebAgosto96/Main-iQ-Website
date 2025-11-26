@@ -173,7 +173,7 @@ export default function EditUserProfile() {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      alert("Profile updated successfully");
+      localStorage.setItem("profileToast", "Profile updated successfully");
       navigate("/profile");
     } catch (err) {
       const msg =
@@ -270,37 +270,45 @@ export default function EditUserProfile() {
             <div className="social-edit">
               <h3 style={{ marginTop: "1.5rem" }}>Social Links</h3>
 
-              <label>Instagram</label>
-              <input
-                type="url"
-                placeholder="https://www.instagram.com/your_handle"
-                value={socialLinks.instagram}
-                onChange={handleSocialChange("instagram")}
-              />
+              <div className="social-row">
+                <img src="/ig.png" alt="Instagram" className="social-icon" />
+                <input
+                  type="url"
+                  placeholder="https://www.instagram.com/your_handle"
+                  value={socialLinks.instagram}
+                  onChange={handleSocialChange("instagram")}
+                />
+              </div>
 
-              <label>Twitch</label>
-              <input
-                type="url"
-                placeholder="https://twitch.tv/your_channel"
-                value={socialLinks.twitch}
-                onChange={handleSocialChange("twitch")}
-              />
+              <div className="social-row">
+                <img src="/twitch.png" alt="Twitch" className="social-icon" />
+                <input
+                  type="url"
+                  placeholder="https://twitch.tv/your_channel"
+                  value={socialLinks.twitch}
+                  onChange={handleSocialChange("twitch")}
+                />
+              </div>
 
-              <label>YouTube</label>
-              <input
-                type="url"
-                placeholder="https://www.youtube.com/@yourchannel"
-                value={socialLinks.youtube}
-                onChange={handleSocialChange("youtube")}
-              />
+              <div className="social-row">
+                <img src="/youtube.png" alt="YouTube" className="social-icon" />
+                <input
+                  type="url"
+                  placeholder="https://www.youtube.com/@yourchannel"
+                  value={socialLinks.youtube}
+                  onChange={handleSocialChange("youtube")}
+                />
+              </div>
 
-              <label>TikTok</label>
-              <input
-                type="url"
-                placeholder="https://www.tiktok.com/@your_handle"
-                value={socialLinks.tiktok}
-                onChange={handleSocialChange("tiktok")}
-              />
+              <div className="social-row">
+                <img src="/tiktok.png" alt="TikTok" className="social-icon" />
+                <input
+                  type="url"
+                  placeholder="https://www.tiktok.com/@your_handle"
+                  value={socialLinks.tiktok}
+                  onChange={handleSocialChange("tiktok")}
+                />
+              </div>
             </div>
           </div>
 

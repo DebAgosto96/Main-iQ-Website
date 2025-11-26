@@ -18,6 +18,7 @@ const toAbsolute = (raw) => {
 const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [presence, setPresence] = useState("online");
+  const [toast, setToast] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,6 +42,16 @@ const UserProfile = () => {
     };
     fetchProfile();
   }, [navigate]);
+
+  useEffect(() => {
+    const msg = localStorage.getItem("profileToast");
+    if (msg) {
+      setToast(msg);
+      localStorage.removeItem("profileToast");
+      const t = setTimeout(() => setToast(""), 2000);
+      return () => clearTimeout(t);
+    }
+  }, []);
 
   const avatarSrc = useMemo(() => {
     const raw = user?.imageURL || user?.imageUrl || user?.avatar;
@@ -84,6 +95,9 @@ const UserProfile = () => {
   return (
     <>
       <VideoBG src="/Desktop.mp4" />
+
+      {toast && <div className="toast">{toast}</div>}
+
       <div className="profile-page">
         <div className="profile-card">
           <div className="avatar-wrapper">
