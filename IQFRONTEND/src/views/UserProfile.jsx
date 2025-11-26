@@ -56,15 +56,30 @@ const UserProfile = () => {
 
   if (!user) return <p>Loading profile...</p>;
 
-  // Prefer per-user social links; otherwise use small static defaults
-  const logos = Array.isArray(user?.socialLinks) && user.socialLinks.length
-    ? user.socialLinks
-    : [
-        { href: "https://www.instagram.com/buvl/", img: "/ig.png", alt: "Instagram" },
-        { href: "https://twitch.tv/", img: "/twitch.png", alt: "Twitch" },
-        { href: "https://www.youtube.com/@iQBuvl", img: "/youtube.png", alt: "YouTube" },
-        { href: "https://www.tiktok.com/@iqbuvl", img: "/tiktok.png", alt: "TikTok" },
-      ];
+  const social = user?.socialLinks || {};
+
+  const logos = [
+    {
+      href: social.instagram || "https://www.instagram.com/",
+      img: "/ig.png",
+      alt: "Instagram",
+    },
+    {
+      href: social.twitch || "https://twitch.tv/",
+      img: "/twitch.png",
+      alt: "Twitch",
+    },
+    {
+      href: social.youtube || "https://www.youtube.com/",
+      img: "/youtube.png",
+      alt: "YouTube",
+    },
+    {
+      href: social.tiktok || "https://www.tiktok.com/",
+      img: "/tiktok.png",
+      alt: "TikTok",
+    },
+  ].filter((link) => !!link.href);
 
   return (
     <>
@@ -76,7 +91,9 @@ const UserProfile = () => {
               src={avatarSrc}
               alt={displayUsername}
               className="profile-img"
-              onError={(e) => { e.currentTarget.src = FALLBACK_AVATAR; }}
+              onError={(e) => {
+                e.currentTarget.src = FALLBACK_AVATAR;
+              }}
             />
             <span className={`status-dot ${presence}`} />
           </div>
@@ -92,21 +109,31 @@ const UserProfile = () => {
             <h3>About Me</h3>
             <p>{user.bio || "No bio provided."}</p>
             <div className="tags">
-              {(user.tags && user.tags.length > 0) ? (
-                user.tags.map((tag, i) => <span key={i} className="tag">{tag}</span>)
+              {user.tags && user.tags.length > 0 ? (
+                user.tags.map((tag, i) => (
+                  <span key={i} className="tag">
+                    {tag}
+                  </span>
+                ))
               ) : (
                 <p>No tags provided.</p>
               )}
             </div>
           </div>
 
-          {/* Social links below bio/tags, above buttons */}
           <SocialLinks links={logos} />
 
           <div className="profile-actions">
-            <button className="primary" onClick={() => navigate("/editprofile")}>Edit Profile</button>
+            <button className="primary" onClick={() => navigate("/editprofile")}>
+              Edit Profile
+            </button>
             <button className="ghost">Manage Bookings</button>
-            <button className="ghost" onClick={() => navigator.clipboard.writeText(user.id)}>Message</button>
+            <button
+              className="ghost"
+              onClick={() => navigator.clipboard.writeText(user.id)}
+            >
+              Message
+            </button>
           </div>
         </div>
       </div>

@@ -19,9 +19,20 @@ export default function EditUserProfile() {
   const [user, setUser] = useState(null);
   const [bio, setBio] = useState("");
   const [tags, setTags] = useState([]);
+  const [socialLinks, setSocialLinks] = useState({
+    instagram: "",
+    twitch: "",
+    youtube: "",
+    tiktok: "",
+  });
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [errors, setErrors] = useState({ bio: "", tags: "", image: "", submit: "" });
+  const [errors, setErrors] = useState({
+    bio: "",
+    tags: "",
+    image: "",
+    submit: "",
+  });
 
   const navigate = useNavigate();
 
@@ -41,6 +52,12 @@ export default function EditUserProfile() {
         setUser(u);
         setBio((u.bio || "").slice(0, MAX_BIO));
         setTags(Array.isArray(u.tags) ? u.tags.slice(0, MAX_TAGS) : []);
+        setSocialLinks({
+          instagram: u.socialLinks?.instagram || "",
+          twitch: u.socialLinks?.twitch || "",
+          youtube: u.socialLinks?.youtube || "",
+          tiktok: u.socialLinks?.tiktok || "",
+        });
       } catch {
         alert("Error loading profile.");
         navigate("/login");
@@ -54,7 +71,8 @@ export default function EditUserProfile() {
     };
   }, [imagePreview]);
 
-  const validateBio = (v) => (v.length > MAX_BIO ? `Bio must be ≤ ${MAX_BIO} characters` : "");
+  const validateBio = (v) =>
+    v.length > MAX_BIO ? `Bio must be ≤ ${MAX_BIO} characters` : "";
   const normalizeTag = (t) => t.toLowerCase().trim();
   const validateTag = (t) => {
     if (!t) return "Empty tag";
@@ -75,10 +93,12 @@ export default function EditUserProfile() {
     const t = normalizeTag(e.currentTarget.value);
     e.currentTarget.value = "";
     if (!t) return;
-    if (tags.length >= MAX_TAGS) return setErrors((s) => ({ ...s, tags: `Max ${MAX_TAGS} tags` }));
+    if (tags.length >= MAX_TAGS)
+      return setErrors((s) => ({ ...s, tags: `Max ${MAX_TAGS} tags` }));
     const err = validateTag(t);
     if (err) return setErrors((s) => ({ ...s, tags: err }));
-    if (tags.includes(t)) return setErrors((s) => ({ ...s, tags: "Duplicate tag" }));
+    if (tags.includes(t))
+      return setErrors((s) => ({ ...s, tags: "Duplicate tag" }));
     setTags((prev) => [...prev, t]);
     setErrors((s) => ({ ...s, tags: "" }));
   };
@@ -113,6 +133,14 @@ export default function EditUserProfile() {
     setImagePreview(url);
   };
 
+  const handleSocialChange = (field) => (e) => {
+    const value = e.target.value;
+    setSocialLinks((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) return;
@@ -129,13 +157,23 @@ export default function EditUserProfile() {
       const formData = new FormData();
       formData.append("bio", bio);
       formData.append("tags", JSON.stringify(tags));
+
+      const prunedSocial = Object.fromEntries(
+        Object.entries(socialLinks)
+          .filter(([_, v]) => v && v.trim().length > 0)
+          .map(([k, v]) => [k, v.trim()])
+      );
+      if (Object.keys(prunedSocial).length > 0) {
+        formData.append("socialLinks", JSON.stringify(prunedSocial));
+      }
+
       if (image) formData.append("image", image);
 
       await axios.patch(`${API_ORIGIN}/api/user/${user.id}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      alert("Profile updated successfully!");
+      alert("Profile updated successfully");
       navigate("/profile");
     } catch (err) {
       const msg =
@@ -155,7 +193,6 @@ export default function EditUserProfile() {
       <VideoBG src="/Desktop.mp4" />
       <div className="profile-page">
         <form className="profile-card" onSubmit={handleSubmit} noValidate>
-          {/* AVATAR + EDIT BUTTON (label over hidden input) */}
           <div className="avatar-wrapper">
             <div className="avatar-circle">
               <img
@@ -182,12 +219,11 @@ export default function EditUserProfile() {
               title="Change photo"
               aria-label="Change photo"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
-                  fill="currentColor"
-                />
-              </svg>
+              <img
+                src="/editpicicon.png"
+                alt="Change avatar"
+                className="edit-icon-img"
+              />
             </label>
           </div>
 
@@ -220,19 +256,71 @@ export default function EditUserProfile() {
               {tags.map((tag, i) => (
                 <span key={`${tag}-${i}`} className="tag">
                   {tag}
-                  <button type="button" onClick={() => removeTag(i)} aria-label={`Remove ${tag}`}>
+                  <button
+                    type="button"
+                    onClick={() => removeTag(i)}
+                    aria-label={`Remove ${tag}`}
+                  >
                     ×
                   </button>
                 </span>
               ))}
             </div>
+
+            <div className="social-edit">
+              <h3 style={{ marginTop: "1.5rem" }}>Social Links</h3>
+
+              <label>Instagram</label>
+              <input
+                type="url"
+                placeholder="https://www.instagram.com/your_handle"
+                value={socialLinks.instagram}
+                onChange={handleSocialChange("instagram")}
+              />
+
+              <label>Twitch</label>
+              <input
+                type="url"
+                placeholder="https://twitch.tv/your_channel"
+                value={socialLinks.twitch}
+                onChange={handleSocialChange("twitch")}
+              />
+
+              <label>YouTube</label>
+              <input
+                type="url"
+                placeholder="https://www.youtube.com/@yourchannel"
+                value={socialLinks.youtube}
+                onChange={handleSocialChange("youtube")}
+              />
+
+              <label>TikTok</label>
+              <input
+                type="url"
+                placeholder="https://www.tiktok.com/@your_handle"
+                value={socialLinks.tiktok}
+                onChange={handleSocialChange("tiktok")}
+              />
+            </div>
           </div>
 
-          {errors.submit && <div className="error" style={{ marginTop: "0.75rem" }}>{errors.submit}</div>}
+          {errors.submit && (
+            <div className="error" style={{ marginTop: "0.75rem" }}>
+              {errors.submit}
+            </div>
+          )}
 
           <div className="profile-actions">
-            <button className="primary" type="submit">Save Changes</button>
-            <button className="ghost" type="button" onClick={() => navigate("/profile")}>Cancel</button>
+            <button className="primary" type="submit">
+              Save Changes
+            </button>
+            <button
+              className="ghost"
+              type="button"
+              onClick={() => navigate("/profile")}
+            >
+              Cancel
+            </button>
           </div>
         </form>
       </div>
