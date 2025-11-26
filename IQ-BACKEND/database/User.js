@@ -43,6 +43,22 @@ const User = db.define("user", {
     unique: true,
     validate: { isEmail: true },
   },
+
+  // new fields
+  bio: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+  tags: {
+    type: DataTypes.JSON,
+    allowNull: false,
+    defaultValue: [],
+  },
+    socialLinks: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: null,
+  },
 });
 
 User.prototype.toJSON = function () {
@@ -50,6 +66,5 @@ User.prototype.toJSON = function () {
   delete values.passwordHash;
   return values;
 };
-
 
 module.exports = User;

@@ -4,6 +4,7 @@ const Player = require("./player");
 const Message = require("./message");
 const Booking = require("./booking");
 const Service = require("./service"); 
+// const Stream = require("./Stream");
 
 /* Associations */
 Player.belongsTo(User, { foreignKey: "userId" });
@@ -16,6 +17,8 @@ Booking.belongsTo(User, { foreignKey: "userId" });
 Booking.belongsTo(Player, { foreignKey: "playerId" });
 Booking.belongsTo(Service, { foreignKey: "serviceId" });
 Service.hasMany(Booking, { foreignKey: "serviceId" });
+
+// Player.hasMany(Stream, { foreignKey: "playerId"})
 
 module.exports = {
   db,

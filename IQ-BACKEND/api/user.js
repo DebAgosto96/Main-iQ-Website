@@ -9,16 +9,14 @@ const authenticateJWT = require("../middleware/authenticateJWT");
 const authorizeRole = require("../middleware/authorizeRole");
 const { body, validationResult } = require("express-validator");
 const sanitizeHtml = require("sanitize-html");
-// --- helpers ---
+
 const stripAllHtml = (s) =>
   sanitizeHtml(s ?? "", { allowedTags: [], allowedAttributes: {} })
     .replace(/\s+/g, " ")
     .trim();
 
-// Import rate limiter from middleware
 const { userWriteLimiter } = require("../middleware/limiters");
 
-// --- multer (auto-create uploads, jpg/png only, 2MB) ---
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadPath = path.join(__dirname, "../uploads");
@@ -42,9 +40,6 @@ const upload = multer({
   limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
 });
 
-// --- routes ---
-
-// Profile of logged-in user
 router.get("/profile", authenticateJWT, async (req, res) => {
   try {
     const user = await User.findByPk(req.user.userId);
@@ -56,7 +51,6 @@ router.get("/profile", authenticateJWT, async (req, res) => {
   }
 });
 
-// Get user by ID — limit to self or admin
 router.get("/:id", authenticateJWT, async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
@@ -73,21 +67,18 @@ router.get("/:id", authenticateJWT, async (req, res) => {
   }
 });
 
-// Update profile (bio/tags/image) — rate-limited + validated
 router.patch(
   "/:id",
   authenticateJWT,
   userWriteLimiter,
   upload.single("image"),
   [
-    // Bio: plain text, ≤500 chars
     body("bio")
       .optional({ checkFalsy: true })
       .customSanitizer((v) => stripAllHtml(v))
       .isLength({ max: 500 })
       .withMessage("Bio must be ≤ 500 characters"),
 
-    // Tags: array or JSON string → cleaned, lowercase, unique, ≤10, each ≤20 chars, safe chars
     body("tags")
       .optional({ nullable: true })
       .customSanitizer((v, { req }) => {
@@ -100,15 +91,61 @@ router.patch(
           .filter((t) => typeof t === "string")
           .map((t) => stripAllHtml(t).toLowerCase())
           .filter((t) => t.length > 0);
-        arr = [...new Set(arr)]; // dedupe
+        arr = [...new Set(arr)];
         req.body.tags = arr;
         return arr;
       })
       .custom((arr) => {
         if (!Array.isArray(arr)) throw new Error("Tags must be an array.");
         if (arr.length > 10) throw new Error("Max 10 tags.");
-        const bad = arr.find((t) => t.length > 20 || !/^[a-z0-9 _.\-#&]+$/i.test(t));
+        const bad = arr.find(
+          (t) => t.length > 20 || !/^[a-z0-9 _.\-#&]+$/i.test(t)
+        );
         if (bad) throw new Error("Invalid tag format.");
+        return true;
+      }),
+
+    body("socialLinks")
+      .optional({ nullable: true })
+      .customSanitizer((v, { req }) => {
+        if (!v) {
+          req.body.socialLinks = null;
+          return null;
+        }
+        let obj = v;
+        if (typeof v === "string") {
+          try { obj = JSON.parse(v); } catch { obj = {}; }
+        }
+        if (typeof obj !== "object" || Array.isArray(obj) || obj === null) {
+          obj = {};
+        }
+
+        const allowedKeys = ["instagram", "twitch", "youtube", "tiktok"];
+        const cleaned = {};
+
+        for (const key of allowedKeys) {
+          const raw = obj[key];
+          if (typeof raw === "string" && raw.trim().length > 0) {
+            const s = stripAllHtml(raw.trim());
+            cleaned[key] = s;
+          }
+        }
+
+        req.body.socialLinks =
+          Object.keys(cleaned).length > 0 ? cleaned : null;
+        return req.body.socialLinks;
+      })
+      .custom((obj) => {
+        if (obj == null) return true;
+        if (typeof obj !== "object" || Array.isArray(obj)) {
+          throw new Error("socialLinks must be an object.");
+        }
+        const urlRegex = /^https?:\/\/[^\s]+$/i;
+        for (const [key, value] of Object.entries(obj)) {
+          if (typeof value !== "string" || !urlRegex.test(value)) {
+            throw new Error(`Invalid URL for ${key}.`);
+          }
+        }
         return true;
       }),
   ],
@@ -126,6 +163,9 @@ router.patch(
       const updates = {};
       if (typeof req.body.bio === "string") updates.bio = req.body.bio;
       if (Array.isArray(req.body.tags)) updates.tags = req.body.tags;
+      if (Object.prototype.hasOwnProperty.call(req.body, "socialLinks")) {
+        updates.socialLinks = req.body.socialLinks;
+      }
       if (req.file) updates.imageURL = `/uploads/${req.file.filename}`;
 
       const updatedUser = await user.update(updates);
@@ -136,6 +176,7 @@ router.patch(
     }
   }
 );
+
 
 // Admin create user — rate-limited + validated
 router.post(
@@ -176,7 +217,7 @@ router.post(
   }
 );
 
-// Delete user
+
 router.delete("/:id", authenticateJWT, async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);

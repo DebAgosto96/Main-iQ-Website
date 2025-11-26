@@ -16,7 +16,7 @@ const run = async () => {
     firstName: "Chandler",
     lastName: "Cadman",
     username: "iQBUVL",
-    email: "chandlercadman@gmail.com", // LOWERCASE
+    email: "chandlercadman@gmail.com", 
     passwordHash: adminPw,
     role: "admin",
   });
